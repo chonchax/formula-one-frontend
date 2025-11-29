@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav className="fixed top-0 left-0 w-full h-20 bg-white-dark shadow-md z-50 flex justify-between items-center px-6 md:px-10">
+      <nav className="fixed top-0 left-0 w-full h-20 bg-black shadow-md z-50 flex justify-between items-center px-6 md:px-10">
         <div
           className="cursor-pointer flex items-center h-full"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -25,9 +25,9 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <ul className="hidden md:flex gap-8 font-semibold text-black text-2xl">
+        <ul className="hidden md:flex gap-8 font-semibold text-white text-lg">
           {navlinks.map((item) => (
-            <li key={item.name} className="flex items-center h-full">
+            <li key={item.name} className="flex items-center h-full font-title">
               <NavLink
                 to={item.link}
                 className={({ isActive }) =>
@@ -42,12 +42,16 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Hamburger Icon */}
+        {/* Mobile Hamburger */}
         <div
           className="md:hidden cursor-pointer flex items-center"
           onClick={() => setHamburger(!hamburger)}
         >
-          <IconMenu2 width={32} height={32} className="text-black" />
+          {hamburger ? (
+            <IconX width={32} height={32} className="text-white" />
+          ) : (
+            <IconMenu2 width={32} height={32} className="text-white" />
+          )}
         </div>
       </nav>
 
@@ -57,13 +61,9 @@ const Navbar = () => {
           hamburger ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <span className="absolute top-8 right-8 cursor-pointer" onClick={() => setHamburger(false)}>
-          <IconX width={32} height={32} className="text-red" />
-        </span>
-
         <ul className="flex flex-col gap-12 text-black font-semibold items-center">
           {navlinks.map((item) => (
-            <li key={item.name} onClick={() => setHamburger(false)}>
+            <li className="font-title " key={item.name} onClick={() => setHamburger(false)}>
               <NavLink
                 to={item.link}
                 className={({ isActive }) =>
