@@ -7,10 +7,10 @@
 
   --color-black: #000000;
   --color-black-light: #1a1a1a;
-  --color-black-lighter: #2a2a2a;
+  --color-black-lighter: #869697;
 
   --color-white: #ffffff;
-  --color-white-dark: #f2f2f2;
+  --color-white-dark: #f6f4f1;
 
   --color-border: #d3d3d3;
   --color-hover: #e10600;
@@ -18,6 +18,7 @@
 
   --font-title: 'Poppins', sans-serif;
   --font-body: 'Mulish', sans-serif;
+  --font-headers: 'Formula1', sans-serif;
 
   --container-center: true;
   --container-padding: 4rem;
