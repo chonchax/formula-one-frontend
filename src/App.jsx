@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Teams from './pages/Teams'
 import Drivers from './pages/Drivers'
+import RacesPage from './pages/Races'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/teams" element={<Teams />} />
       <Route path="/drivers" element={<Drivers />} />
+      <Route path="/races" element={<RacesPage />} />
     </Routes>
   )
 }
