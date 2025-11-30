@@ -23,5 +23,6 @@ export const api = {
   deleteTeam: (teamId) => fetchApi(`/teams/${teamId}`, { method: 'DELETE' }),
   getDriversRanking: (page = 1) => fetchApi(`/drivers/ranking?page=${page}`),
   getRaces: (page = 1) => fetchApi(`/races?page=${page}`),
-  getDrivers: (page = 1) => fetchApi(`/drivers?page=${page}`)
+  getDrivers: (page = 1) => fetchApi(`/drivers?page=${page}`),
+  deleteDriver: (driverId) => fetchApi(`/drivers/${driverId}`, { method: 'DELETE' })
 }

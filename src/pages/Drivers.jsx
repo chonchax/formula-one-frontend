@@ -22,6 +22,7 @@ const DriversPage = () => {
   const [drivers, setDrivers] = useState([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [message, setMessage] = useState('')
 
   const fetchDrivers = async (page = 1) => {
     try {
@@ -30,6 +31,21 @@ const DriversPage = () => {
       setTotalPages(data.pagy.total_pages)
     } catch (err) {
       console.error('Error fetching drivers:', err)
+    }
+  }
+
+  const handleDelete = async (driverId) => {
+    if (!confirm('Voulez-vous vraiment supprimer ce pilote ?')) return
+
+    try {
+      await api.deleteDriver(driverId)
+      setMessage('Pilote supprimée avec succès !')
+      fetchDrivers(page)
+      setTimeout(() => setMessage(''), 3000)
+    } catch (err) {
+      console.error(err)
+      setMessage('Erreur lors de la suppression')
+      setTimeout(() => setMessage(''), 3000)
     }
   }
 
@@ -47,6 +63,8 @@ const DriversPage = () => {
         setPage={setPage}
         totalPages={totalPages}
         teamColors={teamColors}
+        onDelete={handleDelete}
+        message={message}
       />
     </div>
   )
