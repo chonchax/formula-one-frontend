@@ -18,7 +18,6 @@ const teamColors = {
 }
 
 const DriversPage = () => {
-
   const [drivers, setDrivers] = useState([])
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)

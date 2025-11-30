@@ -1,4 +1,4 @@
-import DriverCard from "./DriverCard"
+import DriverCard from './DriverCard'
 
 const defaultColor = '#1a1a1a'
 
