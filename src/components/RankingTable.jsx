@@ -28,12 +28,19 @@ const RankingTable = () => {
       <div className="w-full max-w-[1800px] mx-auto">
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
-            <thead className="bg-white text-black-lighter">
-              <tr>
-                <th className="py-3 px-2 text-left">Classement</th>
-                <th className="py-3 px-6 text-left">Pilote</th>
-                <th className="py-3 px-6 text-left">Équipe</th>
-                <th className="py-3 px-6 text-left">Points</th>
+            <thead>
+              <tr className="border-b border-gray-700">
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Pos.</th>
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Pilote</th>
+
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden sm:table-cell">#</th>
+
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden md:table-cell">
+                  Nationality
+                </th>
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden md:table-cell">Team</th>
+
+                <th className="py-3 px-4 sm:px-6 lg:px-10 text-right">Pts.</th>
               </tr>
             </thead>
 
@@ -43,12 +50,29 @@ const RankingTable = () => {
                   key={driver.id}
                   className="border-b border-border hover:bg-primary-light transition-colors"
                 >
-                  <td className="py-3 px-6 font-bold">{(page - 1) * 10 + index + 1}</td>
-                  <td className="py-3 px-6 text-black font-bold">
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 font-bold">
+                    {(page - 1) * 10 + index + 1}
+                  </td>
+
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 text-black font-bold">
                     {driver.first_name} {driver.last_name}
                   </td>
-                  <td className="py-3 px-6 text-black font-bold">{driver.team.name}</td>
-                  <td className="py-3 px-6 text-black font-bold">{driver.total_points}</td>
+
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 hidden sm:table-cell">
+                    {driver.number}
+                  </td>
+
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 hidden md:table-cell">
+                    {driver.nationality}
+                  </td>
+
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 hidden md:table-cell text-black font-bold">
+                    {driver.team.name}
+                  </td>
+
+                  <td className="py-3 px-4 sm:px-6 lg:px-10 text-black font-bold text-right">
+                    {driver.total_points}
+                  </td>
                 </tr>
               ))}
             </tbody>

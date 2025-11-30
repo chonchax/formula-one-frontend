@@ -1,19 +1,19 @@
-import TeamCard from './TeamCard'
+import DriverCard from './DriverCard'
 
 const defaultColor = '#1a1a1a'
 
-const TeamsGrid = ({ teams, teamColors, onDelete, page, setPage, totalPages, message }) => {
+const DriversGrid = ({ drivers, teamColors, onDelete, page, setPage, totalPages, message }) => {
   return (
     <>
       <div className="flex-1 flex justify-center px-6">
         <div className="w-full max-w-[1600px] mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-start">
-          {teams.map((team) => (
-            <TeamCard
-              key={team.id}
-              teamName={team.name}
-              location={team.location}
-              color={teamColors[team.name] || defaultColor}
-              onDelete={() => onDelete(team.id)}
+          {drivers.map((driver) => (
+            <DriverCard
+              key={driver.id}
+              driverName={`${driver.first_name} ${driver.last_name}`}
+              teamName={driver.team.name}
+              color={teamColors[driver.team.name] || defaultColor}
+              onDelete={() => onDelete(driver.id)}
             />
           ))}
         </div>
@@ -50,4 +50,4 @@ const TeamsGrid = ({ teams, teamColors, onDelete, page, setPage, totalPages, mes
   )
 }
 
-export default TeamsGrid
+export default DriversGrid
