@@ -3,7 +3,7 @@ import { IconX } from '@tabler/icons-react'
 const TeamCard = ({ teamName, location, color = '#222', onDelete }) => {
   return (
     <div
-      className={`relative rounded-lg p-6 flex flex-col justify-between gap-4 text-white`}
+      className="relative rounded-lg p-6 flex flex-col justify-between gap-4 text-white min-h-[220px] max-h-[280px] shadow-md"
       style={{ backgroundColor: color }}
     >
       <button
