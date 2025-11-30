@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import TeamCard from '../components/TeamCard'
 import PageHeader from '../components/PageHeader'
 import TeamsGrid from '../components/TeamsGrid'
+import { api } from '../services/ApiService'
 
 const teamColors = {
   Alpine: '#0052B1',
@@ -25,8 +26,7 @@ const TeamsPage = () => {
 
   const fetchTeams = async (page = 1) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/v1/teams?page=${page}`)
-      const data = await res.json()
+      const data = await api.getTeams(page)
       setTeams(data.teams || [])
       setTotalPages(data.pagy.total_pages)
     } catch (err) {
@@ -38,24 +38,12 @@ const TeamsPage = () => {
     if (!confirm('Voulez-vous vraiment supprimer cette écurie ?')) return
 
     try {
-      const token = localStorage.getItem('jwtToken')
-      const res = await fetch(`http://localhost:3001/api/v1/teams/${teamId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      if (res.status === 204) {
-        setMessage('Écurie supprimée avec succès !')
-        fetchTeams(page)
-        setTimeout(() => setMessage(''), 3000)
-      } else {
-        throw new Error('Erreur suppression')
-      }
+      await api.deleteTeam(teamId)
+      setMessage('Écurie supprimée avec succès !')
+      fetchTeams(page)
+      setTimeout(() => setMessage(''), 3000)
     } catch (err) {
-      console.error('Erreur suppression team:', err)
+      console.error(err)
       setMessage('Erreur lors de la suppression')
       setTimeout(() => setMessage(''), 3000)
     }
