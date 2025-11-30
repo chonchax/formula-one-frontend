@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import PageHeader from '../components/PageHeader'
-import DriversGrid from '../components/DriversGrid'
+import Navbar from '../components/common/Navbar'
+import PageHeader from '../components/common/PageHeader'
+import DriversGrid from '../components/drivers/DriversGrid'
 import { api } from '../services/ApiService'
 
 const teamColors = {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { api } from '../services/ApiService'
+import { api } from '../../services/ApiService'
 
 const RankingTable = () => {
   const [drivers, setDrivers] = useState([])

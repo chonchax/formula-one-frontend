@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import ResultsTable from './ResultsTable'
-import { api } from '../services/ApiService'
+import { api } from '../../services/ApiService'
 
 const RaceEditionList = ({ raceId }) => {
   const [editions, setEditions] = useState([])

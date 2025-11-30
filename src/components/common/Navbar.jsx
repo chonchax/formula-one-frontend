@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
-import logo from '../assets/logo.png'
+import logo from '../../assets/logo.png'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {

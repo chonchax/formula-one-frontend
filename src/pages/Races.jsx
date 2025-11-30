@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import PageHeader from '../components/PageHeader'
-import RaceCard from '../components/RaceCard'
+import Navbar from '../components/common/Navbar'
+import PageHeader from '../components/common/PageHeader'
+import RaceCard from '../components/races/RaceCard'
 import { api } from '../services/ApiService'
 
 const RacesPage = () => {

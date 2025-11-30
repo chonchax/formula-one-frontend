@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import TeamCard from '../components/TeamCard'
-import PageHeader from '../components/PageHeader'
-import TeamsGrid from '../components/TeamsGrid'
+import Navbar from '../components/common/Navbar'
+import TeamCard from '../components/teams/TeamCard'
+import PageHeader from '../components/common/PageHeader'
+import TeamsGrid from '../components/teams/TeamsGrid'
 import { api } from '../services/ApiService'
 
 const teamColors = {
