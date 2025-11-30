@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { api } from '../services/ApiService'
 
 const RankingTable = () => {
   const [drivers, setDrivers] = useState([])
@@ -7,8 +8,7 @@ const RankingTable = () => {
 
   const fetchDrivers = async (page = 1) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/v1/drivers/ranking?page=${page}`)
-      const data = await res.json()
+      const data = await api.getDriversRanking(page)
       setDrivers(data.drivers || [])
       setTotalPages(data.pagy.total_pages)
     } catch (err) {
