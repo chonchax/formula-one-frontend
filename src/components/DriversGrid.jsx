@@ -23,17 +23,19 @@ const DriversGrid = ({ drivers, teamColors, onDelete, page, setPage, totalPages,
         <button
           disabled={page <= 1}
           onClick={() => setPage((page) => page - 1)}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className="bg-primary text-white px-4 py-2 rounded disabled:opacity-50"
         >
           {'<'}
         </button>
-        <span className="px-4 py-2">
-          {page} / {totalPages}
+
+        <span className="text-black font-semibold self-center">
+          Page {page} / {totalPages}
         </span>
+
         <button
           disabled={page >= totalPages}
           onClick={() => setPage((page) => page + 1)}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className="bg-primary text-white px-4 py-2 rounded disabled:opacity-50"
         >
           {'>'}
         </button>
