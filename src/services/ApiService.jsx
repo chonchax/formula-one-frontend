@@ -24,8 +24,14 @@ export const api = {
   getDriversRanking: (page = 1) => fetchApi(`/drivers/ranking?page=${page}`),
   getRaces: (page = 1) => fetchApi(`/races?page=${page}`),
   getDrivers: (page = 1) => fetchApi(`/drivers?page=${page}`),
+  getAllDrivers: () => fetchApi(`/drivers?limit=1000`),
   deleteDriver: (driverId) => fetchApi(`/drivers/${driverId}`, { method: 'DELETE' }),
   getRaces: (page = 1) => fetchApi(`/races?page=${page}`),
   getRaceEditions: (raceId) => fetchApi(`/races/${raceId}/race_editions`),
-  getResults: (raceEditionId) => fetchApi(`/race_editions/${raceEditionId}/results`)
+  getResults: (raceEditionId) => fetchApi(`/race_editions/${raceEditionId}/results`),
+  addRaceResults: (payload) =>
+    fetchApi(`/results`, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    })
 }

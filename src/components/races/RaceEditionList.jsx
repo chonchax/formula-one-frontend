@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import ResultsTable from './ResultsTable'
+import AddRaceResultsForm from './AddRaceResultsFrom'
 import { api } from '../../services/ApiService'
 
 const RaceEditionList = ({ raceId }) => {
   const [editions, setEditions] = useState([])
   const [selectedEdition, setSelectedEdition] = useState(null)
+  const [showAddForm, setShowAddForm] = useState(false)
 
   useEffect(() => {
     const fetchEditions = async () => {
@@ -24,16 +26,42 @@ const RaceEditionList = ({ raceId }) => {
         {editions.map((ed) => (
           <button
             key={ed.id}
-            className={`px-3 py-1 rounded-md border ${
-              selectedEdition?.id === ed.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'
+            className={`px-3 py-1 rounded-md border transition cursor-pointer hover:text-hover ${
+              selectedEdition?.id === ed.id
+                ? 'bg-primary text-white font-bold hover:text-white'
+                : 'bg-gray-100 text-gray-800 font-bold'
             }`}
-            onClick={() => setSelectedEdition(ed)}
+            onClick={() => {
+              setSelectedEdition(ed)
+              setShowAddForm(false)
+            }}
           >
             {ed.season}
           </button>
         ))}
-        <button className="px-3 py-1 rounded border bg-green-100 text-green-700">+ Ajouter</button>
+
+        <button
+          className={`px-3 py-1 rounded-md border font-semibold cursor-pointer transition-colors
+    ${showAddForm ? 'bg-primary text-white' : 'bg-green-100 text-black hover:text-hover'}`}
+          onClick={() => {
+            setShowAddForm(true)
+            setSelectedEdition(null)
+          }}
+        >
+          + Ajouter
+        </button>
       </div>
+
+      {showAddForm && (
+        <AddRaceResultsForm
+          raceId={raceId}
+          onCancel={() => setShowAddForm(false)}
+          onCreated={() => {
+            setShowAddForm(false)
+            api.getRaceEditions(raceId).then((data) => setEditions(data.editions))
+          }}
+        />
+      )}
 
       {selectedEdition && <ResultsTable raceEditionId={selectedEdition.id} />}
     </div>
