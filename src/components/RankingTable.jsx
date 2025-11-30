@@ -30,10 +30,10 @@ const RankingTable = () => {
           <table className="w-full bg-white rounded-lg shadow-md overflow-hidden">
             <thead className="bg-white text-black-lighter">
               <tr>
-                <th className="py-3 px-2 text-left">Classement</th>
+                <th className="py-3 px-2 text-left">Pos.</th>
                 <th className="py-3 px-6 text-left">Pilote</th>
                 <th className="py-3 px-6 text-left">Équipe</th>
-                <th className="py-3 px-6 text-left">Points</th>
+                <th className="py-3 px-6 text-left">Pts.</th>
               </tr>
             </thead>
 
