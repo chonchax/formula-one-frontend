@@ -5,6 +5,7 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
   const [drivers, setDrivers] = useState([])
   const [results, setResults] = useState([])
   const [season, setSeason] = useState('')
+  const [seasonError, setSeasonError] = useState('')
   const [raceDate, setRaceDate] = useState('')
 
   useEffect(() => {
@@ -43,6 +44,12 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
   }
 
   const submit = async () => {
+    if (!season) {
+      setSeasonError('La saison est obligatoire')
+      return
+    }
+
+    setSeasonError('')
     const payload = { race_id: raceId, season, race_date: raceDate, results }
     try {
       await api.addRaceResults(payload)
@@ -54,8 +61,8 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
   }
 
   return (
-    <div className="mt-4 p-4 bg-white rounded-lg shadow-md">
-      <div className="flex gap-4 mb-4">
+    <div className="mt-4 p-4 bg-white rounded-lg shadow-md overflow-x-auto">
+      <div className="flex gap-4 mb-4 flex-wrap">
         <input
           type="text"
           placeholder="Season (ex: 2025)"
@@ -69,32 +76,25 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
           value={raceDate}
           onChange={(e) => setRaceDate(e.target.value)}
         />
+        {seasonError && <span className="text-red-500 text-sm">{seasonError}</span>}
       </div>
 
-      <table className="w-full bg-white rounded-lg border">
+      <table className="w-full bg-white rounded-lg">
         <thead>
-          <tr className="border-b">
-            <th className="px-4 py-2">Pos</th>
-            <th className="px-4 py-2">Driver</th>
-            <th className="px-4 py-2">Team</th>
-            <th className="px-4 py-2">Best Lap</th>
-            <th className="px-4 py-2">Points</th>
+          <tr className="border-b border-gray-300">
+            <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Pos</th>
+            <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Driver</th>
+            <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden md:table-cell">Team</th>
+            <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Best Lap</th>
+            <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden lg:table-cell">Points</th>
           </tr>
         </thead>
         <tbody>
           {results.map((result, i) => (
-            <tr key={i} className="border-b hover:bg-gray-50">
-              <td className="px-4 py-2">
-                <input
-                  type="number"
-                  value={result.position}
-                  readOnly
-                  className="border px-2 py-1 rounded w-20"
-                />
-              </td>
+            <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
+              <td className="py-3 px-4 sm:px-6 lg:px-10 font-bold">{result.position}</td>
 
-              {/* Driver select */}
-              <td className="px-4 py-2">
+              <td className="py-3 px-4 sm:px-6 lg:px-10">
                 <select
                   value={result.driver_id}
                   onChange={(e) => updateResult(i, 'driver_id', e.target.value)}
@@ -104,12 +104,7 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
                   {drivers.map((driver) => {
                     const isTaken = results.some((r, idx) => idx !== i && r.driver_id === driver.id)
                     return (
-                      <option
-                        key={driver.id}
-                        value={driver.id}
-                        disabled={isTaken}
-                        className={isTaken ? 'text-gray-400' : 'text-black'}
-                      >
+                      <option key={driver.id} value={driver.id} disabled={isTaken}>
                         {driver.first_name} {driver.last_name}
                       </option>
                     )
@@ -117,21 +112,21 @@ const AddRaceResultsForm = ({ raceId, onCancel, onCreated }) => {
                 </select>
               </td>
 
-              <td className="px-4 py-2 font-semibold">
+              <td className="py-3 px-4 sm:px-6 lg:px-10 font-semibold hidden md:table-cell">
                 {drivers.find((driver) => driver.id === result.driver_id)?.team?.name || ''}
               </td>
 
-              <td className="px-4 py-2">
+              <td className="py-3 px-4 sm:px-6 lg:px-10">
                 <input
                   type="text"
                   placeholder="1:12.308"
                   value={result.best_lap_time}
                   onChange={(e) => updateResult(i, 'best_lap_time', e.target.value)}
-                  className="border px-2 py-1 rounded"
+                  className="border px-2 py-1 rounded w-full"
                 />
               </td>
 
-              <td className="px-4 py-2">
+              <td className="py-3 px-4 sm:px-6 lg:px-10 text-black font-bold hidden lg:table-cell">
                 <input
                   type="number"
                   value={result.points}

@@ -22,6 +22,7 @@ const DriversPage = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [message, setMessage] = useState('')
+  const [isError, setIsError] = useState(false)
 
   const fetchDrivers = async (page = 1) => {
     try {
@@ -38,11 +39,13 @@ const DriversPage = () => {
 
     try {
       await api.deleteDriver(driverId)
+      setIsError(false)
       setMessage('Pilote supprimée avec succès !')
       fetchDrivers(page)
       setTimeout(() => setMessage(''), 3000)
     } catch (err) {
       console.error(err)
+      setIsError(true)
       setMessage('Erreur lors de la suppression')
       setTimeout(() => setMessage(''), 3000)
     }

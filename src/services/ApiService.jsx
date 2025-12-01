@@ -8,6 +8,13 @@ const fetchApi = async (endpoint, options = {}) => {
   }
 
   const res = await fetch(`${BASE_URL}${endpoint}`, { ...options, headers })
+
+  if (res.status === 401) {
+    localStorage.removeItem('jwtToken')
+    window.location.href = '/login'
+    throw new Error('Session expirée. Veuillez vous reconnecter.')
+  }
+
   if (!res.ok) {
     const errorText = await res.text()
     throw new Error(errorText || 'Erreur API')
@@ -19,6 +26,21 @@ const fetchApi = async (endpoint, options = {}) => {
 }
 
 export const api = {
+  signIn: async ({ email, password }) => {
+    const res = await fetch(`${BASE_URL}/sign_in`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: { email, password } })
+    })
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}))
+      throw new Error(data.error || 'Login failed')
+    }
+
+    return res.json()
+  },
+  getTeamsRanking: (page = 1) => fetchApi(`/teams/ranking?page=${page}`),
   getTeams: (page = 1) => fetchApi(`/teams?page=${page}`),
   deleteTeam: (teamId) => fetchApi(`/teams/${teamId}`, { method: 'DELETE' }),
   getDriversRanking: (page = 1) => fetchApi(`/drivers/ranking?page=${page}`),
