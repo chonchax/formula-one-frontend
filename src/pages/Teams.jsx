@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import TeamCard from '../components/TeamCard'
-import PageHeader from '../components/PageHeader'
-import TeamsGrid from '../components/TeamsGrid'
+import Navbar from '../components/common/Navbar'
+import TeamCard from '../components/teams/TeamCard'
+import PageHeader from '../components/common/PageHeader'
+import TeamsGrid from '../components/teams/TeamsGrid'
 import { api } from '../services/ApiService'
 
 const teamColors = {
@@ -23,6 +23,7 @@ const TeamsPage = () => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [message, setMessage] = useState('')
+  const [isError, setIsError] = useState(false)
 
   const fetchTeams = async (page = 1) => {
     try {
@@ -39,11 +40,13 @@ const TeamsPage = () => {
 
     try {
       await api.deleteTeam(teamId)
+      setIsError(false)
       setMessage('Écurie supprimée avec succès !')
       fetchTeams(page)
       setTimeout(() => setMessage(''), 3000)
     } catch (err) {
       console.error(err)
+      setIsError(true)
       setMessage('Erreur lors de la suppression')
       setTimeout(() => setMessage(''), 3000)
     }

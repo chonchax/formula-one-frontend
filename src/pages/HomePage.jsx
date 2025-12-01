@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import Navbar from '../components/Navbar'
-import RankingTable from '../components/RankingTable'
-import PageHeader from '../components/PageHeader'
+import Navbar from '../components/common/Navbar'
+import RankingTable from '../components/drivers/RankingTable'
+import PageHeader from '../components/common/PageHeader'
 
 const Home = () => {
   return (

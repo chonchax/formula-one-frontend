@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { api } from '../services/ApiService'
+import { api } from '../../services/ApiService'
 
 const RankingTable = () => {
   const [drivers, setDrivers] = useState([])
@@ -32,14 +32,11 @@ const RankingTable = () => {
               <tr className="border-b border-gray-700">
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Pos.</th>
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-left">Pilote</th>
-
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden sm:table-cell">#</th>
-
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden md:table-cell">
                   Nationality
                 </th>
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-left hidden md:table-cell">Team</th>
-
                 <th className="py-3 px-4 sm:px-6 lg:px-10 text-right">Pts.</th>
               </tr>
             </thead>
@@ -55,7 +52,10 @@ const RankingTable = () => {
                   </td>
 
                   <td className="py-3 px-4 sm:px-6 lg:px-10 text-black font-bold">
-                    {driver.first_name} {driver.last_name}
+                    <div className="flex flex-col sm:flex-row sm:gap-1">
+                      <span>{driver.first_name}</span>
+                      <span>{driver.last_name}</span>
+                    </div>
                   </td>
 
                   <td className="py-3 px-4 sm:px-6 lg:px-10 hidden sm:table-cell">
