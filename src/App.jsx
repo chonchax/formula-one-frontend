@@ -4,12 +4,14 @@ import Home from './pages/HomePage'
 import Teams from './pages/Teams'
 import Drivers from './pages/Drivers'
 import RacesPage from './pages/Races'
+import LegalPage from './pages/LegalPage'
 import RequireAuth from './components/authentification/RequireAuth'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/legal" element={<LegalPage />} />
       <Route
         path="/"
         element={

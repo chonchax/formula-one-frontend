@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Navbar from '../components/common/Navbar'
 import PageHeader from '../components/common/PageHeader'
 import DriversGrid from '../components/drivers/DriversGrid'
+import Footer from '../components/common/Footer'
 import { api } from '../services/ApiService'
 
 const teamColors = {
@@ -68,6 +69,7 @@ const DriversPage = () => {
         onDelete={handleDelete}
         message={message}
       />
+      <Footer />
     </div>
   )
 }

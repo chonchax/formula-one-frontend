@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from '../components/common/Navbar'
 import RankingTable from '../components/drivers/RankingTable'
 import PageHeader from '../components/common/PageHeader'
+import Footer from '../components/common/Footer'
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Navbar />
       <PageHeader title="Drivers' Standings" />
       <RankingTable />
+      <Footer />
     </div>
   )
 }
