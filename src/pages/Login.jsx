@@ -14,7 +14,7 @@ const Login = () => {
 
     try {
       const data = await api.signIn({ email, password })
-      localStorage.setItem('jwtToken', data.token)
+      sessionStorage.setItem('jwtToken', data.token)
       navigate('/')
     } catch (err) {
       setError(err.message || 'Erreur serveur')

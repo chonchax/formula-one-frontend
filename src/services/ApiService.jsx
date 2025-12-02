@@ -1,7 +1,9 @@
+import { AuthService } from './AuthService'
+
 const BASE_URL = 'http://localhost:3001/api/v1'
 
 const fetchApi = async (endpoint, options = {}) => {
-  const token = localStorage.getItem('jwtToken')
+  const token = sessionStorage.getItem('jwtToken')
   const headers = {
     'Content-Type': 'application/json',
     Authorization: token ? `Bearer ${token}` : ''
@@ -10,9 +12,7 @@ const fetchApi = async (endpoint, options = {}) => {
   const res = await fetch(`${BASE_URL}${endpoint}`, { ...options, headers })
 
   if (res.status === 401) {
-    localStorage.removeItem('jwtToken')
-    window.location.href = '/login'
-    throw new Error('Session expirée. Veuillez vous reconnecter.')
+    AuthService.handleUnauthorized()
   }
 
   if (!res.ok) {

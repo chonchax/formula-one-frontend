@@ -1,5 +1,13 @@
 export const AuthService = {
-  getToken: () => localStorage.getItem('jwtToken'),
-  isAuthenticated: () => !!localStorage.getItem('jwtToken'),
-  logout: () => localStorage.removeItem('jwtToken')
+  getToken: () => sessionStorage.getItem('jwtToken'),
+  isAuthenticated: () => !!sessionStorage.getItem('jwtToken'),
+  logout: () => {
+    sessionStorage.removeItem('jwtToken')
+    window.location.href = '/login'
+  },
+
+  handleUnauthorized: () => {
+    AuthService.logout()
+    throw new Error('Session expirée. Veuillez vous reconnecter.')
+  }
 }
