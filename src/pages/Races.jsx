@@ -3,6 +3,7 @@ import Navbar from '../components/common/Navbar'
 import PageHeader from '../components/common/PageHeader'
 import RaceList from '../components/races/RaceList'
 import { api } from '../services/ApiService'
+import Footer from '../components/common/Footer'
 
 const RacesPage = () => {
   const [races, setRaces] = useState([])
@@ -28,6 +29,7 @@ const RacesPage = () => {
       <Navbar />
       <PageHeader title="Races" />
       <RaceList races={races} page={page} totalPages={totalPages} setPage={setPage} />
+      <Footer />
     </div>
   )
 }

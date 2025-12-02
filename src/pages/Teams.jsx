@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Navbar from '../components/common/Navbar'
-import TeamCard from '../components/teams/TeamCard'
+import Footer from '../components/common/Footer'
 import PageHeader from '../components/common/PageHeader'
 import TeamsGrid from '../components/teams/TeamsGrid'
 import { api } from '../services/ApiService'
@@ -69,6 +69,7 @@ const TeamsPage = () => {
         totalPages={totalPages}
         message={message}
       />
+      <Footer />
     </div>
   )
 }
