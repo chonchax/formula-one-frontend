@@ -1,6 +1,6 @@
 import { AuthService } from './AuthService'
 
-const BASE_URL = 'http://localhost:3001/api/v1'
+const BASE_URL = import.meta.env.VITE_API_URL
 
 const fetchApi = async (endpoint, options = {}) => {
   const token = sessionStorage.getItem('jwtToken')
